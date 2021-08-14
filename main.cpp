@@ -133,27 +133,27 @@ void decode(string instruction, match_results<string::const_iterator> parse) {
 
 void execute(int select, int location) {
 	
-	// load transfer contents of MQ to AC
+	// cargar transfer contents of MQ to AC
 	if (select == 1) {
 		accumulatorRegister = multiplierQuotientRegister;
 	}
 
-	//load MQMX transfer contents of memory location to MQ
+	//cargar MQMX transfer contents of memory location to MQ
 	else if (select == 2) {
 		multiplierQuotientRegister = newMem.getMem(location);
 	}
 
-	// store MX store contents of AC to memory location
+	// almacenar MX store contents of AC to memory location
 	else if (select == 3) {
 		newMem.setMem(location, accumulatorRegister);
 	}
 
-	// loadMX which transfers the contents of M(X) to AC
+	// cargarMX which transfers the contents of M(X) to AC
 	else if (select == 4) {
 		accumulatorRegister = newMem.getMem(location);
 	}
 
-	//loadNegativeMX, which transfers the negative M(X) to AC
+	// cargarnegativoMX, which transfers the negative M(X) to AC
 	else if (select == 5) {
 		int x = stringToInt(newMem.getMem(location));
 		x = -x;
@@ -161,7 +161,7 @@ void execute(int select, int location) {
 		accumulatorRegister = to_string(x);
 	}
 
-	//loadAbsoluteMX, which transfers the absolute value of MX to AC
+	// cargarAbsoluteMX, which transfers the absolute value of MX to AC
 	else if (select == 6) {
 		int x = stringToInt(newMem.getMem(location));
 		if (x < 0) {
@@ -171,7 +171,7 @@ void execute(int select, int location) {
 		accumulatorRegister = to_string(x);
 	}
 
-	//loadNegativeAbsoluteMX, which transfers the negative absolute value of MX to AC
+	//cargarNegativeAbsoluteMX, which transfers the negative absolute value of MX to AC
 	
 	else if (select == 7) {
 		int x = stringToInt(newMem.getMem(location));
@@ -183,19 +183,19 @@ void execute(int select, int location) {
 		accumulatorRegister = to_string(x);
 	}
 
-	//the jump statement, which sets the program counter equal to the memory location
+	//salto which sets the program counter equal to the memory location
 	else if (select == 8) {
 		programCounter = location;
 	}
 
-	//the jump+ statement - if the AC is nonnegative, then PC = location
+	//salto+ if the AC is nonnegative, then PC = location
 	else if (select == 9) {
 		if (stringToInt(accumulatorRegister) >= 0) {
 			programCounter = location;
 		}
 	}
 
-	//addMX, which adds the contents of the memory location to AC
+	//sumMX, which adds the contents of the memory location to AC
 	else if (select == 10) {
 		int aReg = stringToInt(accumulatorRegister);
 		int value = stringToInt(newMem.getMem(location));
@@ -204,7 +204,7 @@ void execute(int select, int location) {
 		accumulatorRegister = to_string(aReg);
 	}
 
-	//addAbsoluteMX, which adds the absolute value of location to AC
+	//sumAbsoluteMX, which adds the absolute value of location to AC
 	else if (select == 11) {
 		int aReg = stringToInt(accumulatorRegister);
 		int value = stringToInt(newMem.getMem(location));
