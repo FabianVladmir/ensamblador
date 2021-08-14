@@ -1,0 +1,9 @@
+0 6 a
+1 2 b 
+2 c
+3 4
+4 inicio
+5 cargar M(0)
+6 sum M(1)
+8 cargar M(2)
+9 fin
